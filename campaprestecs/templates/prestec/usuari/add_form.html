@@ -1,0 +1,78 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="custom-admin-form">
+    <h1>Crear nou usuari</h1>
+    <form method="post" id="usuari_form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_username">Nom d'usuari:</label>
+            {{ form.username }}
+            {{ form.username.errors }}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_email">Correu electrònic:</label>
+            {{ form.email }}
+            {{ form.email.errors }}
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="id_first_name">Nom:</label>
+                {{ form.first_name }}
+                {{ form.first_name.errors }}
+            </div>
+            <div class="form-group col-md-6">
+                <label for="id_last_name">Cognom:</label>
+                {{ form.last_name }}
+                {{ form.last_name.errors }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="id_tipus_usuari">Tipus d'usuari:</label>
+            {{ form.tipus_usuari }}
+            {{ form.tipus_usuari.errors }}
+        </div>
+        
+        <div class="form-group" id="curs-field">
+            <label for="id_curs">Curs:</label>
+            {{ form.curs }}
+            {{ form.curs.errors }}
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="id_password1">Contrasenya:</label>
+                {{ form.password1 }}
+                {{ form.password1.errors }}
+            </div>
+            <div class="form-group col-md-6">
+                <label for="id_password2">Confirmar contrasenya:</label>
+                {{ form.password2 }}
+                {{ form.password2.errors }}
+            </div>
+        </div>
+        
+        <div class="submit-row">
+            <input type="submit" value="Desar" class="default" name="_save">
+        </div>
+    </form>
+</div>
+
+<script>
+// Amaga/mostra el camp de curs segons el tipus d'usuari
+document.getElementById('id_tipus_usuari').addEventListener('change', function() {
+    const cursField = document.getElementById('curs-field');
+    cursField.style.display = this.value === 'alumne' ? 'block' : 'none';
+});
+// Executa-ho al carregar la pàgina també
+document.addEventListener('DOMContentLoaded', function() {
+    const cursField = document.getElementById('curs-field');
+    cursField.style.display = document.getElementById('id_tipus_usuari').value === 'alumne' ? 'block' : 'none';
+});
+</script>
+{% endblock %}

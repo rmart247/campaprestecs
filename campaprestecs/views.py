@@ -17,3 +17,11 @@ def get_prestecs(request):
 @login_required
 def prova_auth(request):
 	return HttpResponse("usuari: "+str(request.user))
+
+@login_required
+def get_usuaris(request):
+	jsonData = list( Usuari.objects.all().values() )
+	return JsonResponse({
+            "status": "OK",
+            "questions": jsonData,
+        }, safe=False)

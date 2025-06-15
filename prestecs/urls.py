@@ -17,7 +17,10 @@ urlpatterns = [
 
     #Api manual (sense plugins)
     path('api/get_prestecs', views.get_prestecs, name='get_prestecs'),
+    path('api/get_usuaris', views.get_usuaris, name='get_usuaris'),
 
     #api ninja
     path("api/", api.myapi.urls),
+
+
 ]

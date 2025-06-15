@@ -52,9 +52,11 @@ def test(request):
 
 #TODO Afegir atributs del model
 class PrestecOut(Schema):
-	id: int
-	nom: str
-	data_inici : Optional[date]
+	professor_origen :str
+	professor_destino: str
+	alumne : str
+	ordinador: str
+	
 
 @myapi.get("/prestec", response=List[PrestecOut], auth=BasicAuth())
 def prestec(request):
